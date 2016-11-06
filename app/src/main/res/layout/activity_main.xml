@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:columnCount="4"
+    android:rowCount="6"
+    tools:context="com.micro_army.a15.MainActivity">
+
+    <Button android:id="@+id/b0" />
+    <Button android:id="@+id/b1" />
+    <Button android:id="@+id/b2" />
+    <Button android:id="@+id/b3" />
+    <Button android:id="@+id/b4" />
+    <Button android:id="@+id/b5" />
+    <Button android:id="@+id/b6" />
+    <Button android:id="@+id/b7" />
+    <Button android:id="@+id/b8" />
+    <Button android:id="@+id/b9" />
+    <Button android:id="@+id/b10" />
+    <Button android:id="@+id/b11" />
+    <Button android:id="@+id/b12" />
+    <Button android:id="@+id/b13" />
+    <Button android:id="@+id/b14" />
+    <Button android:id="@+id/b15" />
+
+    <TextView android:id="@+id/result"
+        android:layout_columnSpan="4"
+        android:layout_gravity="fill"
+        android:gravity="center" />
+
+    <Button android:id="@+id/restart"
+        android:layout_gravity="fill"
+        android:layout_column="1"
+        android:layout_columnSpan="2"
+        android:onClick="onClickRestart"
+        android:text="@string/restart" />
+</GridLayout>
