@@ -45,8 +45,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         } else {
             // Create and draw new board
             createBoard();
-            drawBoard();
         }
+        drawBoard();
     }
 
     private void createBoard(){ // Create and shuffle board on start
@@ -142,7 +142,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         moves++;
         Button pressedButton = (Button) v;
-        // This means "change on board element with index that have a pressed button value with empty cell
+        // This means "swap on board element with index that have a pressed button value with empty cell"
         swap(board, getArrayIndex(board, Integer.parseInt(pressedButton.getText().toString())), getArrayIndex(board, 0));
         if(checkVictory()){
             TextView result = (TextView) findViewById(R.id.result);
@@ -150,8 +150,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
             for (Button button : buttons){
                 button.setEnabled(false);
             }
+        } else {
+            drawBoard();
         }
-        drawBoard();
     }
 
     public void onClickRestart(View view) {
@@ -161,10 +162,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     public int getArrayIndex(int[] arr,int value) { // Custom Array.indexOf(int value) method
-        int k=0;
-        for(int i=0;i<arr.length;i++){
+        int k = -1;
+        for(int i = 0; i < arr.length; i++){
             if(arr[i]==value){
-                k=i;
+                k = i;
                 break;
             }
         }
