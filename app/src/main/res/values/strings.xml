@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">15</string>
     <string name="restart">Restart</string>
+    <string name="curMoves">You did %1$d moves</string>
 </resources>

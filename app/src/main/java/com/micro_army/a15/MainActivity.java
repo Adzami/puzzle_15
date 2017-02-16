@@ -1,6 +1,7 @@
 package com.micro_army.a15;
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,28 +13,16 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private int[] board = new int[16]; // Our board
     private Button[] buttons = new Button[16]; // Visualization of board
     private int moves = 0;
+    private int emptyPosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Initialize buttons
-        buttons[0] = (Button) findViewById(R.id.b0);
-        buttons[1] = (Button) findViewById(R.id.b1);
-        buttons[2] = (Button) findViewById(R.id.b2);
-        buttons[3] = (Button) findViewById(R.id.b3);
-        buttons[4] = (Button) findViewById(R.id.b4);
-        buttons[5] = (Button) findViewById(R.id.b5);
-        buttons[6] = (Button) findViewById(R.id.b6);
-        buttons[7] = (Button) findViewById(R.id.b7);
-        buttons[8] = (Button) findViewById(R.id.b8);
-        buttons[9] = (Button) findViewById(R.id.b9);
-        buttons[10] = (Button) findViewById(R.id.b10);
-        buttons[11] = (Button) findViewById(R.id.b11);
-        buttons[12] = (Button) findViewById(R.id.b12);
-        buttons[13] = (Button) findViewById(R.id.b13);
-        buttons[14] = (Button) findViewById(R.id.b14);
-        buttons[15] = (Button) findViewById(R.id.b15);
+        // Initialize buttons, i've got an id's from R
+        for(int i = 0; i < buttons.length; i++){
+            buttons[i] = (Button) findViewById(0x7f080001 + i);
+        }
         // and set them same listener
         for (Button button : buttons){
             button.setOnClickListener(this);
@@ -55,13 +44,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
             board[i] = i;
         }
         // Shuffle it
-        for (int i = 15; i >= 0; i--){
-            int j = (int) (Math.random() * i);
-            swap(board, j, i);
-        }
+        shuffle();
         // It it's not solvable, swap any two neighbors
         if (!isSolvable()){
             swap(board, 0, 1);
+        }
+        // Check where is an empty cell
+        emptyPosition = getArrayIndex(board, 0);
+    }
+
+    private void shuffle(){ // Let's shuffle our board
+        for (int i = 15; i >= 0; i--){
+            int j = (int) (Math.random() * i);
+            swap(board, j, i);
         }
     }
 
@@ -69,6 +64,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         int t = arr[i];
         arr[i] = arr[j];
         arr[j] = t;
+        emptyPosition = arr[i] == 0 ? i : arr[j] == 0 ? j : emptyPosition;
     }
 
     private void drawBoard(){
@@ -81,7 +77,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             }
         }
         // Disable all buttons we can't press right now because it's not valid move
-        int emptyPosition = getArrayIndex(board, 0);
         for (Button button : buttons){
             button.setEnabled(false);
         }
@@ -103,6 +98,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (emptyPosition%4 == 0 && (emptyPosition-1) > -1){
             buttons[emptyPosition - 1].setEnabled(false);
         }
+
+        // Number of moves
+        Resources res = getResources();
+        TextView currentMove = (TextView) findViewById(R.id.result);
+        currentMove.setText(String.format(Locale.US, res.getString(R.string.curMoves), moves));
     }
 
     private boolean isSolvable(){ // We want only solvable boards
@@ -121,7 +121,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
         }
-        result = result + ((getArrayIndex(board, 0) / 4)+1);
+        result = result + ((emptyPosition / 4)+1);
         // If it's even, board is solvable
         if (result%2 == 0){
             solvable = true;
@@ -143,7 +143,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         moves++;
         Button pressedButton = (Button) v;
         // This means "swap on board element with index that have a pressed button value with empty cell"
-        swap(board, getArrayIndex(board, Integer.parseInt(pressedButton.getText().toString())), getArrayIndex(board, 0));
+        swap(board, getArrayIndex(board, Integer.parseInt(pressedButton.getText().toString())), emptyPosition);
         if(checkVictory()){
             TextView result = (TextView) findViewById(R.id.result);
             result.setText("Congratulations! You've completed\nthis puzzle for " + moves + " moves");

@@ -9,27 +9,28 @@
     android:rowCount="6"
     tools:context="com.micro_army.a15.MainActivity">
 
-    <Button android:id="@+id/b0" />
-    <Button android:id="@+id/b1" />
-    <Button android:id="@+id/b2" />
-    <Button android:id="@+id/b3" />
-    <Button android:id="@+id/b4" />
-    <Button android:id="@+id/b5" />
-    <Button android:id="@+id/b6" />
-    <Button android:id="@+id/b7" />
-    <Button android:id="@+id/b8" />
-    <Button android:id="@+id/b9" />
-    <Button android:id="@+id/b10" />
-    <Button android:id="@+id/b11" />
-    <Button android:id="@+id/b12" />
-    <Button android:id="@+id/b13" />
-    <Button android:id="@+id/b14" />
-    <Button android:id="@+id/b15" />
+    <Button android:id="@+id/b0" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b1" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b2" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b3" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b4" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b5" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b6" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b7" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b8" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b9" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b10" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b11" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b12" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b13" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b14" android:width="60sp" android:height="60sp" />
+    <Button android:id="@+id/b15" android:width="60sp" android:height="60sp" />
 
     <TextView android:id="@+id/result"
         android:layout_columnSpan="4"
         android:layout_gravity="fill"
-        android:gravity="center" />
+        android:gravity="center"
+        android:text="@string/curMoves" />
 
     <Button android:id="@+id/restart"
         android:layout_gravity="fill"
